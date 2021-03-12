@@ -310,7 +310,7 @@ body, input {
    cursor: pointer;
 }
 
-.user-name{
+.user-name {
    color: #fff;
 }
 
@@ -388,11 +388,11 @@ body, input {
 }
 
 @media (max-width: 410px) {
-   .navbar{
+   .navbar {
       padding-right: 0.7rem;
       padding-left: 0.7rem;
    }
-   .brand-name{
+   .brand-name {
       margin-right: 0.25rem;
    }
 }
@@ -405,7 +405,7 @@ body, input {
    .nav__user-img {
       margin-right: 0.25rem;
    }
-   .user-name{
+   .user-name {
       font-size: 0.85rem;
    }
 }
@@ -414,4 +414,8 @@ body, input {
 
 .cursor-pointer {
    cursor: pointer;
+}
+
+.resmodal .modal-content {
+   border: none;
 }
