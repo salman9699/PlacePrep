@@ -106,7 +106,7 @@ const EditPracticeProblem = (props) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        console.log('temp', apti);
+        
         updatePracticeProblem(apti);
 
     };

@@ -121,7 +121,7 @@ const testCodePython = async (file, testcaseFile, inputFile, noOfInputs) => {
         }
     }
 
-    console.log('res', givenInput);
+
     let finalResults = {
         message: 'success',
         totalTestcasesRan: results.length,

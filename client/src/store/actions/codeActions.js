@@ -45,13 +45,13 @@ export const getQuestions = () => async (dispatch) => {
 export const getQuestion = (slug, check = false) => async (dispatch) => {
     try {
         const res = await axios.get(`/api/v1/questions/${slug}?check=${check}`);
-        console.log('res', res);
+        
         dispatch({
             type: GET_CODE_QUESTION,
             payload: res.data.data.data
         });
     } catch (err) {
-        console.log('err', err?.response);
+        
         dispatch({
             type: CODE_QUESTION_ERROR,
             payload: err.response.data.message,
@@ -94,7 +94,7 @@ export const updateQuestion = (question) => async (dispatch) => {
     };
     try {
         const res = await axios.patch(`/api/v1/questions/${question._id}`, question, config);
-        console.log('res', res);
+        
 
         if (res.request.status === 200 && res.request.statusText === 'OK') {
             dispatch({
@@ -108,7 +108,7 @@ export const updateQuestion = (question) => async (dispatch) => {
         });
 
     } catch (err) {
-        console.log('err', err?.response);
+        
         dispatch({
             type: CODE_QUESTION_ERROR,
             payload: err.response.data.message,
@@ -119,7 +119,7 @@ export const updateQuestion = (question) => async (dispatch) => {
 export const deleteQuestion = (id) => async (dispatch) => {
     try {
         const res = await axios.delete(`/api/v1/questions/${id}`);
-        console.log('res', res);
+        
 
         if (res.request.status === 204 && res.request.statusText === 'No Content') {
             dispatch({
@@ -132,7 +132,7 @@ export const deleteQuestion = (id) => async (dispatch) => {
             payload: id
         });
     } catch (err) {
-        console.log('err', err);
+        
 
         dispatch({
             type: CODE_QUESTION_ERROR,
@@ -147,13 +147,13 @@ export const submitCode = (runObj, id) => async (dispatch) => {
     });
     try {
         const res = await axios.post(`/api/v1/onlineJudge/submitcode/${id}`, runObj);
-        console.log('res sub', res);
+        
         dispatch({
             type: SUBMIT_CODE,
             payload: res.data.data
         });
     } catch (err) {
-        console.log('err', err?.response);
+        
         dispatch({
             type: CODE_QUESTION_ERROR,
             payload: err.response.data.message,
@@ -167,13 +167,13 @@ export const runCode = (runObj) => async (dispatch) => {
     });
     try {
         const res = await axios.post(`/api/v1/onlineJudge/runcode`, runObj);
-        console.log('res run', res);
+        
         dispatch({
             type: RUN_CODE,
             payload: res.data.data
         });
     } catch (err) {
-        console.log('err', err.response);
+        
         dispatch({
             type: CODE_QUESTION_ERROR,
             payload: err.response.data.message,
@@ -218,14 +218,14 @@ export const getCodeSubmissions = (queryObj) => async (dispatch) => {
             queryVal = queryObj.user ? queryObj.user : queryObj.code;
         }
         const res = await axios.get(`/api/v1/codeSubmissions?${queryKey}=${queryVal}`);
-        console.log('res', res);
+        
         dispatch({
             type: GET_CODE_SUBMISSIONS,
             payload: res.data.data.codeSubmissions
         });
 
     } catch (err) {
-        console.log('err', err);
+        
         dispatch({
             type: CODE_QUESTION_ERROR,
             payload: err.response.data.message,
@@ -236,14 +236,14 @@ export const getCodeSubmissions = (queryObj) => async (dispatch) => {
 export const getCodeSubmission = (id) => async (dispatch) => {
     try {
         const res = await axios.get(`/api/v1/codeSubmissions/${id}`);
-        console.log('res', res);
+        
 
         dispatch({
             type: GET_CODE_SUBMISSION,
             payload: res.data.data.data
         });
     } catch (err) {
-        console.log('err', err.response);
+        
         dispatch({
             type: CODE_QUESTION_ERROR,
             payload: err.response.data.message,
@@ -260,7 +260,7 @@ export const deleteCodeSubmission = (id) => async (dispatch) => {
             payload: id
         });
     } catch (err) {
-        console.log('err', err.response);
+        
         dispatch({
             type: CODE_QUESTION_ERROR,
             payload: err.response.data.message || err.response.data.error

@@ -157,7 +157,7 @@ const CreateCodeQuestion = (props) => {
 
             setCodeQuestion({ ...codeQuestion, sampleInputs: sampleArray });
 
-            console.log('temp', temp);
+            
             current !== null
                 ? updateQuestion(temp)
                 : addQuestion(temp);

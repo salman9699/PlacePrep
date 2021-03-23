@@ -23,7 +23,9 @@ import {
     FOR_PASS_MAIL_SENT,
     CLR_FOR_PASS_MAIL_SENT,
     PASSWORD_RESET,
-    CLR_PASSWORD_RESET
+    CLR_PASSWORD_RESET,
+    USER_SETT_UPDATED,
+    CLR_USER_SETT_UPDATED
 } from "../actions/actionTypes";
 import axios from "axios";
 
@@ -37,13 +39,13 @@ export const loadUser = (verified = false, startCheck = false) => async (dispatc
                 method: "GET",
                 url: "/api/v1/user/me?check=true",
             });
-            console.log('useres', res);
+            
             dispatch({
                 type: USER_LOADED_JWT,
                 payload: res.data.data,
             });
         } catch (err) {
-            console.log(err.response);
+            
             if (!startCheck) {
                 dispatch({
                     type: AUTH_ERROR,
@@ -67,7 +69,7 @@ export const login = (formdata) => async (dispatch) => {
     };
     try {
         const res = await axios.post("/api/v1/user/login", formdata, config);
-        console.log('resss', res);
+        
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data.data,
@@ -96,7 +98,7 @@ export const register = formdata => async dispatch => {
         });
         loadUser(true);
     } catch (err) {
-        console.log('errhere', err);
+        
         dispatch({
             type: REGISTER_FAIL,
             payload: err.response.data.message
@@ -133,6 +135,14 @@ export const updateMe = (data, type) => async dispatch => {
     try {
         const url = type === 'password' ? '/api/v1/user/updateMyPassword' : '/api/v1/user/updateMe';
         const res = await axios.patch(url, data, config);
+
+        
+        if (res.request.status === 200 && res.request.statusText === 'OK') {
+            dispatch({
+                type: USER_SETT_UPDATED
+            });
+        }
+
         dispatch({
             type: UPDATE_ME,
             payload: res.data.data
@@ -145,12 +155,18 @@ export const updateMe = (data, type) => async dispatch => {
     }
 };
 
+export const clearUserSettUpdated = () => (dispatch) => {
+    dispatch({
+        type: CLR_USER_SETT_UPDATED
+    });
+};
+
 export const clearErrors = () => ({ type: CLEAR_AUTH_ERRORS });
 
 export const forgotPassword = (email) => async dispatch => {
     try {
         const res = await axios.post(`/api/v1/user/forgotPassword`, { email });
-        console.log('respass', res);
+        
 
         if (res.request.status === 200 && res.request.statusText === 'OK') {
             dispatch({
@@ -159,7 +175,7 @@ export const forgotPassword = (email) => async dispatch => {
         }
 
     } catch (err) {
-        console.log(err?.response);
+        
         dispatch({
             type: AUTH_ERROR,
             payload: err.response.data.message
@@ -171,7 +187,7 @@ export const forgotPassword = (email) => async dispatch => {
 export const resetPassword = (passwords, token) => async dispatch => {
     try {
         const res = await axios.patch(`/api/v1/user/resetPassword/${token}`, passwords);
-        console.log(res);
+        
 
         if (res.request.status === 200 && res.request.statusText === 'OK') {
             dispatch({
@@ -180,7 +196,7 @@ export const resetPassword = (passwords, token) => async dispatch => {
         }
 
     } catch (err) {
-        console.log(err?.response);
+        
         dispatch({
             type: AUTH_ERROR,
             payload: err.response.data.message
@@ -197,7 +213,7 @@ export const getDetails = () => async (dispatch) => {
             payload: res.data.data
         });
     } catch (err) {
-        console.log(err?.response);
+        
         dispatch({
             type: AUTH_ERROR,
             payload: err.response.data.message
@@ -213,7 +229,7 @@ export const getAllUsers = () => async dispatch => {
             payload: res.data.data.users
         });
     } catch (err) {
-        console.log(err?.response);
+        
         dispatch({
             type: AUTH_ERROR,
             payload: err.response.data.message

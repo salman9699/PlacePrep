@@ -105,10 +105,12 @@ exports.updateQuiz = async (req, res, next) => {
                 }
             });
         }
-        res.status(400).json({
-            status: 'fail',
-            error: err.message
-        });
+
+        return next(err);
+        // res.status(400).json({
+        //     status: 'fail',
+        //     error: err.message
+        // });
     }
 
 };
@@ -219,7 +221,7 @@ exports.deleteQuiz = catchAsync(async (req, res, next) => {
 });
 
 exports.submitQuiz = catchAsync(async (req, res, next) => {
-    // console.log('req', req.user);
+
     const quiz = await Quiz.findById(req.params.id)
         .select('duration questions questionWeightage')
         .populate({
@@ -251,11 +253,7 @@ exports.submitQuiz = catchAsync(async (req, res, next) => {
         user: req.user._id
     };
 
-    // console.log('validation', Date.now() - new Date(req.user.testWillEndAt) > 1000, Date.now() - new Date(req.user.testWillEndAt));
-    // Checking if quiz submission time has passed 
-    // if ((Date.now() - req.user.testStartedAt) / 1000 > (quiz.duration * 60 + 10)) {
-    // console.log('timeup', Date.now(), new Date(req.user.testWillEndAt).getTime(), Date.now() - new Date(req.user.testWillEndAt).getTime());
-    // console.log('timeup1', Date.now() - new Date(req.user.testWillEndAt).getTime() > 1000);
+
     if (Date.now() - new Date(req.user.testWillEndAt).getTime() > 1500) {
         submissionObj.valid = false;
     }
@@ -318,12 +316,12 @@ exports.startQuiz = catchAsync(async (req, res, next) => {
         return next(new AppError('No user found with that ID.', 404));
     }
 
-    //console.log('quiz', quiz);
 
-    console.log('user.testStartedAt', user.testStartedAt.toLocaleString('en-IN',
-        { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }));
-    console.log('user.testWillEndAt', user.testWillEndAt.toLocaleString('en-IN',
-        { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+
+    // console.log('user.testStartedAt', user.testStartedAt.toLocaleString('en-IN',
+    //     { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+    // console.log('user.testWillEndAt', user.testWillEndAt.toLocaleString('en-IN',
+    //     { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }));
 
     res.status(200).json({
         status: 'success',

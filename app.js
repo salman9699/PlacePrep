@@ -10,16 +10,51 @@ const userRouter = require('./routes/userRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const cors = require('cors');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const hpp = require('hpp');
+const compression = require('compression');
+const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 
 const app = express();
 
 // Parsing the data into body
-// app.use(cors())
-// app.options('*', cors())
+app.use(cors());
+app.options('*', cors())
+
+
+// Set security HTTP headers
+app.use(helmet());
+
+// Limit requests from same API
+const limiter = rateLimit({
+    max: 100,
+    windowMs: 60 * 60 * 1000,
+    message: 'Too many requests from this IP, please try again in an hour!'
+});
+app.use('/api', limiter);
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(mongoSanitize());
+
+// Data sanitization against XSS
+app.use(xss());
+
+// Prevent parameter pollution
+// app.use(
+//     hpp({
+//         whitelist: [
+//             //   'check'
+//         ]
+//     })
+// );
+app.use(compression());
+
 
 app.use('/api/v1/aptiquestions', aptiQuestionRouter);
 app.use('/api/v1/questions', questionRouter);
@@ -37,36 +72,11 @@ app.all('*', (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
-app.use(globalErrorHandler);
+app.use((req, res, next) => {
+    
+    next();
+}, globalErrorHandler);
 
 
-// app.get('/run1', (req, res) => {
-//     exec('g++ ./main1.cpp -o main', (err, stdout, stderr) => {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             console.log('output', stdout);
-//         }
-//     });
-
-//     res.json({
-//         data: 'running...'
-//     });
-// });
-
-// app.get('/run2', (req, res) => {
-
-//     exec('.\\main.exe < ./onlineJudge/input.txt ', (err, stdout, stderr) => {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             console.log('output', stdout);
-//         }
-//     });
-
-//     res.json({
-//         data: 'running...'
-//     });
-// });
 
 module.exports = app;

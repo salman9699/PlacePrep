@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getPracticeProblems = (categorySlug, topicSlug) => async (dispatch) => {
     try {
         const res = await axios.get(`/api/v1/aptiquestions?categorySlug=${categorySlug}&topicSlug=${topicSlug}`);
-        console.log('res', res);
+    
 
         dispatch({
             type: actionTypes.GET_PRACTICE_PROBLEMS,
@@ -12,7 +12,7 @@ export const getPracticeProblems = (categorySlug, topicSlug) => async (dispatch)
         });
 
     } catch (err) {
-        console.log('err', err.response);
+        
         dispatch({
             type: actionTypes.PRACTICE_PROBLEM_ERROR,
             payload: err.response.data.message
@@ -23,14 +23,14 @@ export const getPracticeProblems = (categorySlug, topicSlug) => async (dispatch)
 export const getPracticeProblem = (id) => async (dispatch) => {
     try {
         const res = await axios.get(`/api/v1/aptiquestions/${id}`);
-        console.log('res', res);
+        
 
         dispatch({
             type: actionTypes.GET_PRACTICE_PROBLEM,
             payload: res.data.data.data
         });
     } catch (err) {
-        console.log('err', err.response);
+        
         dispatch({
             type: actionTypes.PRACTICE_PROBLEM_ERROR,
             payload: err.response.data.message
@@ -47,7 +47,7 @@ export const addTopic = (apti) => async (dispatch) => {
     };
     try {
         const res = await axios.post('/api/v1/aptiquestions', apti, config);
-        console.log('res', res);
+        
 
         if (res.request.status === 201 && res.request.statusText === 'Created') {
             dispatch({
@@ -60,7 +60,7 @@ export const addTopic = (apti) => async (dispatch) => {
             payload: res.data.data.data
         });
     } catch (err) {
-        console.log('err', err.response);
+        
         dispatch({
             type: actionTypes.PRACTICE_PROBLEM_ERROR,
             payload: err.response.data.message
@@ -77,7 +77,7 @@ export const updatePracticeProblem = (pracProb) => async (dispatch) => {
     try {
         const res = await axios.patch(`/api/v1/aptiquestions/${pracProb._id}`, pracProb, config);
 
-        console.log('res', res);
+        
 
         if (res.request.status === 200 && res.request.statusText === 'OK') {
             dispatch({
@@ -90,7 +90,7 @@ export const updatePracticeProblem = (pracProb) => async (dispatch) => {
             payload: res.data.data.data
         });
     } catch (err) {
-        console.log('err', err);
+        
         dispatch({
             type: actionTypes.PRACTICE_PROBLEM_ERROR,
             payload: err.response.data.message
@@ -101,7 +101,7 @@ export const updatePracticeProblem = (pracProb) => async (dispatch) => {
 export const deletePracticeProblem = (id) => async (dispatch) => {
     try {
         const res = await axios.delete(`/api/v1/aptiquestions/${id}`);
-        console.log('res', res);
+        
 
         if (res.request.status === 204 && res.request.statusText === 'No Content') {
             dispatch({
@@ -115,7 +115,7 @@ export const deletePracticeProblem = (id) => async (dispatch) => {
         });
 
     } catch (err) {
-        console.log('err', err);
+        
         dispatch({
             type: actionTypes.PRACTICE_PROBLEM_ERROR,
             payload: err.response.data.message
@@ -126,7 +126,7 @@ export const deletePracticeProblem = (id) => async (dispatch) => {
 export const deletePracProbByTopic = (category, topic) => async (dispatch) => {
     try {
         const res = await axios.delete(`/api/v1/aptiquestions/deletemany?category=${category}&topic=${topic}`);
-        console.log('res', res);
+        
 
         if (res.request.status === 204 && res.request.statusText === 'No Content') {
             dispatch({
@@ -142,7 +142,7 @@ export const deletePracProbByTopic = (category, topic) => async (dispatch) => {
             }
         });
     } catch (err) {
-        console.log('err', err);
+        
         dispatch({
             type: actionTypes.PRACTICE_PROBLEM_ERROR,
             payload: err.response.data.message
@@ -159,7 +159,7 @@ export const getCategoryAndTopic = () => async (dispatch) => {
             payload: res.data.data
         });
     } catch (err) {
-        console.log('err', err.response);
+        
         dispatch({
             type: actionTypes.PRACTICE_PROBLEM_ERROR,
             payload: err.response.data.message
@@ -180,7 +180,7 @@ export const updatePracProbTopic = (topicObj) => async (dispatch) => {
             type: actionTypes.UPDATE_PRACTICE_PROBLEM_TOPIC
         });
     } catch (err) {
-        console.log('err', err);
+        
         dispatch({
             type: actionTypes.PRACTICE_PROBLEM_ERROR,
             payload: err.response.data.message

@@ -12,6 +12,7 @@ module.exports = class Email {
 
     newTransport() {
         if (process.env.NODE_ENV === 'production') {
+            console.log("INSIDE PRODUCTION MAIL");
             // Sendgrid
             return nodemailer.createTransport({
                 service: 'SendGrid',
@@ -54,10 +55,12 @@ module.exports = class Email {
         // 3) Create a transport and send email
         await this.newTransport().sendMail(mailOptions);
 
+
     }
 
     async sendWelcome() {
         await this.send('welcome', 'Welcome to the PlacePrep !');
+
     }
 
     async sendPasswordReset() {
@@ -65,6 +68,7 @@ module.exports = class Email {
             'passwordReset',
             'Your password reset token (valid for only 10 minutes)'
         );
+
     }
 }
 

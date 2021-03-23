@@ -11,7 +11,7 @@ const quizQuestionSchema = new mongoose.Schema({
         required: [true, 'Each must have options.'],
         validate: {
             validator: function (ans) {
-                console.log('val', ans);
+
                 return ans.length == 4;
             },
             message: 'Exactly four options are allowed.'

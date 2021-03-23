@@ -135,7 +135,7 @@ exports.submitCode = catchAsync(async (req, res, next) => {
         codeSubmission = await CodeSubmission.create(submissionObj);
     }
 
-    console.log('data', data);
+
 
     res.status(200).json({
         status: 'success',

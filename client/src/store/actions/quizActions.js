@@ -14,14 +14,14 @@ export const getQuizzes = () => async (dispatch) => {
     });
     try {
         const res = await axios.get(`/api/v1/quizzes`);
-        console.log('res', res);
+
         dispatch({
             type: actionTypes.GET_QUIZZES,
             payload: res.data.data.quizzes
         });
     }
     catch (err) {
-        console.log('err', err.response);
+
         dispatch({
             type: actionTypes.QUIZ_ERROR,
             payload: err.response.data.message || err.response.data.error
@@ -35,7 +35,7 @@ export const getQuiz = (slug, check = false) => async (dispatch) => {
             type: actionTypes.SET_LOADING_QUIZ
         });
         const res = await axios.get(`/api/v1/quizzes/${slug}?check=${check}`);
-        console.log('res', res)
+
 
         if (res.data.message === 'Quiz is deactivated') {
             return dispatch({
@@ -52,7 +52,7 @@ export const getQuiz = (slug, check = false) => async (dispatch) => {
         });
     }
     catch (err) {
-        console.log('err', err.response);
+
         dispatch({
             type: actionTypes.QUIZ_ERROR,
             payload: err.response.data.message || err.response.data.error
@@ -71,7 +71,7 @@ export const addQuiz = (quiz) => async (dispatch) => {
             type: actionTypes.SET_LOADING_QUIZ
         });
         const res = await axios.post('/api/v1/quizzes', quiz, config);
-        console.log('res', res);
+
 
         if (res.request.status === 201 && res.request.statusText === 'Created') {
             dispatch({
@@ -85,7 +85,7 @@ export const addQuiz = (quiz) => async (dispatch) => {
         });
     }
     catch (err) {
-        console.log('err', err?.response);
+
         dispatch({
             type: actionTypes.QUIZ_ERROR,
             payload: err.response.data.message || err.response.data.error
@@ -104,7 +104,7 @@ export const updateQuiz = (quiz) => async (dispatch) => {
             type: actionTypes.SET_LOADING_QUIZ
         });
         const res = await axios.patch(`/api/v1/quizzes/${quiz._id}`, quiz, config);
-        console.log('res', res);
+
 
         if (res.request.status === 200 && res.request.statusText === 'OK') {
             dispatch({
@@ -118,7 +118,7 @@ export const updateQuiz = (quiz) => async (dispatch) => {
         });
     }
     catch (err) {
-        console.log('err', err.response);
+
         dispatch({
             type: actionTypes.QUIZ_ERROR,
             payload: err.response.data.message || err.response.data.error
@@ -132,7 +132,7 @@ export const deleteQuiz = (id) => async (dispatch) => {
             type: actionTypes.SET_LOADING_QUIZ
         });
         const res = await axios.delete(`/api/v1/quizzes/${id}`);
-        console.log('res', res);
+
 
         if (res.request.status === 204 && res.request.statusText === 'No Content') {
             dispatch({
@@ -146,7 +146,7 @@ export const deleteQuiz = (id) => async (dispatch) => {
         });
     }
     catch (err) {
-        console.log('err', err.response);
+
         dispatch({
             type: actionTypes.QUIZ_ERROR,
             payload: err.response.data.message || err.response.data.error
@@ -160,7 +160,7 @@ export const deleteQuizQuestion = (id) => async (dispatch) => {
             type: actionTypes.SET_LOADING_QUIZ
         });
         const res = await axios.delete(`/api/v1/quizQuestions/${id}`);
-        console.log('res', res);
+
 
         dispatch({
             type: actionTypes.DELETE_QUIZ_QUESTION,
@@ -168,7 +168,7 @@ export const deleteQuizQuestion = (id) => async (dispatch) => {
         });
 
     } catch (err) {
-        console.log('err', err.response);
+
         dispatch({
             type: actionTypes.QUIZ_ERROR,
             payload: err.response.data.message || err.response.data.error
@@ -200,7 +200,7 @@ export const startQuiz = (id) => async (dispatch) => {
         });
 
     } catch (err) {
-        console.log('err', err.response);
+
         dispatch({
             type: actionTypes.QUIZ_ERROR,
             payload: err.response.data.message || err.response.data.error
@@ -219,7 +219,7 @@ export const submitQuiz = (id, userQuiz) => async (dispatch) => {
             type: actionTypes.SET_LOADING_QUIZ
         });
         const res = await axios.post(`/api/v1/quizzes/submit/${id}`, userQuiz, config);
-        console.log('res', res);
+
 
         if (res.request.status === 200 && res.request.statusText === 'OK') {
             dispatch({
@@ -232,7 +232,7 @@ export const submitQuiz = (id, userQuiz) => async (dispatch) => {
             payload: res.data.data.quizSubmission
         });
     } catch (err) {
-        console.log('err', err.response);
+
         dispatch({
             type: actionTypes.QUIZ_ERROR,
             payload: err.response.data.message || err.response.data.error
@@ -258,7 +258,7 @@ export const getQuizSubmissions = (queryObj) => async (dispatch) => {
             payload: res.data.data.quizSubmissions
         });
     } catch (err) {
-        console.log('err', err.response);
+
         dispatch({
             type: actionTypes.QUIZ_ERROR,
             payload: err.response.data.message || err.response.data.error
@@ -278,7 +278,7 @@ export const getQuizSubmission = (id) => async (dispatch) => {
             payload: res.data.data.data
         });
     } catch (err) {
-        console.log('err', err.response);
+
         dispatch({
             type: actionTypes.QUIZ_ERROR,
             payload: err.response.data.message || err.response.data.error
@@ -292,7 +292,7 @@ export const deleteQuizSubmission = (id) => async (dispatch) => {
             type: actionTypes.SET_LOADING_QUIZ
         });
         const res = await axios.delete(`/api/v1/quizSubmissions/${id}`);
-        console.log('res', res);
+
 
         if (res.request.status === 204 && res.request.statusText === 'No Content') {
             dispatch({
@@ -305,7 +305,7 @@ export const deleteQuizSubmission = (id) => async (dispatch) => {
             payload: id
         });
     } catch (err) {
-        console.log('err', err);
+
         dispatch({
             type: actionTypes.QUIZ_ERROR,
             payload: err.response.data.message || err.response.data.error
@@ -316,7 +316,7 @@ export const deleteQuizSubmission = (id) => async (dispatch) => {
 export const clearQuizErrors = () => ({ type: actionTypes.CLEAR_QUIZ_ERRORS });
 
 export const filterQuizSubmissions = (query, isStudent) => (dispatch) => {
-    console.log('iss', isStudent);
+
     dispatch({
         type: actionTypes.FILTER_QUIZ_SUBMISSIONS,
         payload: {

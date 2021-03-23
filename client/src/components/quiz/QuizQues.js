@@ -39,7 +39,7 @@ const QuizQues = (props) => {
     const [userAnswers, setUserAnswers] = useState(null);
 
     const handleOptClick = (index, ans) => {
-        console.log('clcic', index);
+        
         let tempArr = [...userAnswers];
         tempArr[index] = { ...tempArr[index], selectedAnswer: ans };
         setUserAnswers(tempArr);
@@ -47,7 +47,7 @@ const QuizQues = (props) => {
 
     const handleOnClick = () => {
 
-        console.log('Submitting');
+        
         submitQuiz(props.quizId, { userAnswers: userAnswers });
         tempUserAnswers = props.questions.map((ele) => {
             return {

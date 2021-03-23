@@ -44,7 +44,7 @@ const UserTable = (props) => {
 	}, [filteredUsers]);
 
 	const onchange = (e) => {
-		console.log("hi");
+		
 		if (text.current.value !== "") {
 			filterUsers(e.target.value);
 		} else {
