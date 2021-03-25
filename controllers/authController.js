@@ -20,7 +20,7 @@ const createSendToken = (user, statusCode, res) => {
         ),
         httpOnly: true
     };
-    // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
     res.cookie('jwt', token, cookieOptions);
 
@@ -44,8 +44,8 @@ exports.signup = catchAsync(async (req, res, next) => {
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm
     });
-    const url = `http://localhost:3000/me`;
-    // const url = `${req.protocol}://${req.get('host')}/me`;
+    // const url = `http://localhost:3000/me`;
+    const url = `${req.protocol}://${req.get('host')}/me`;
 
     await new Email(newUser, url).sendWelcome();
 
@@ -177,10 +177,10 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     // 3) Send it to user's email
 
     try {
-        // const resetURL = `${req.protocol}://${req.get(
-        //     'host'
-        // )}/api/v1/user/resetPassword/${resetToken}`;
-        const resetURL = `http://localhost:3000/resetpassword/${resetToken}`;
+        const resetURL = `${req.protocol}://${req.get(
+            'host'
+        )}/api/v1/user/resetPassword/${resetToken}`;
+        // const resetURL = `http://localhost:3000/resetpassword/${resetToken}`;
 
         await new Email(user, resetURL).sendPasswordReset();
 

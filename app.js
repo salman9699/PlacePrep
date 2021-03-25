@@ -12,7 +12,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const cors = require('cors');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
-const xss = require('xss-clean');
+
 const hpp = require('hpp');
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
@@ -28,7 +28,7 @@ app.options('*', cors())
 // Set security HTTP headers
 app.use(helmet());
 
-// Limit requests from same API
+// Limit requests from same API 
 const limiter = rateLimit({
     max: 100,
     windowMs: 60 * 60 * 1000,
@@ -42,8 +42,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(mongoSanitize());
 
-// Data sanitization against XSS
-app.use(xss());
+
 
 // Prevent parameter pollution
 // app.use(
@@ -73,7 +72,7 @@ app.all('*', (req, res, next) => {
 });
 
 app.use((req, res, next) => {
-    
+
     next();
 }, globalErrorHandler);
 
