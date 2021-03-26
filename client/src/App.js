@@ -15,7 +15,7 @@ import ResetPassword from './components/auth/Resetpassword';
 import TestRoute from "./components/routing/TestRoute";
 
 const App = (props) => {
-    const { auth: { user, testDetails }, setTestDetails, loadUser } = props;
+    const { auth: { user }, setTestDetails, loadUser } = props;
 
     useEffect(() => {
         loadUser(false, true);

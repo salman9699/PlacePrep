@@ -22,9 +22,11 @@ const UserProfile = (props) => {
 
     useEffect(() => {
         if (error) {
+
             setAlert(error, 'danger');
             clearErrors();
         }
+        // eslint-disable-next-line
     }, [error]);
 
     useEffect(() => {

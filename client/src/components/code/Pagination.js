@@ -16,14 +16,16 @@ const Pagination = (props) => {
                             key={page}
                             className={currentPage === page ? "active" : " "}
                         >
-                            <a
-                                className="page-link pagntColor"
-                                href="#"
-                                style={{ cursor: 'pointer' }}
-                                onClick={() => onPageChange(page)}
-                            >
-                                {page}
-                            </a>
+                            {//eslint-disable-next-line
+                                <a
+                                    className="page-link pagntColor"
+                                    href="#"
+                                    style={{ cursor: 'pointer' }}
+                                    onClick={() => onPageChange(page)}
+                                >
+                                    {page}
+                                </a>
+                            }
                         </li>
                     ))}
                 </ul>

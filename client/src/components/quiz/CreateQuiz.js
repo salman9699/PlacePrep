@@ -8,7 +8,6 @@ import { setAlert } from "../../store/actions/alertActions";
 
 function CreateQuiz(props) {
     const {
-        auth: { user },
         quiz: { error, isCreated },
         addQuiz,
         clearQuizErrors,

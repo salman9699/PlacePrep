@@ -159,7 +159,7 @@ export const deleteQuizQuestion = (id) => async (dispatch) => {
         dispatch({
             type: actionTypes.SET_LOADING_QUIZ
         });
-        const res = await axios.delete(`/api/v1/quizQuestions/${id}`);
+        await axios.delete(`/api/v1/quizQuestions/${id}`);
 
 
         dispatch({
