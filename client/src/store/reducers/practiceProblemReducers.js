@@ -80,7 +80,7 @@ const reducer = (state = initialState, action) => {
                         .distinctTopicByCat
                         .map((ele, idx) => idx === index ? (state.catAndTopic.distinctTopicByCat[index].filter(ele => ele !== action.payload.topic)) : ele)
                 },
-                filtered: state.filtered.map((ele, eleIdx) => eleIdx === index ?
+                filtered: state.filtered?.map((ele, eleIdx) => eleIdx === index ?
                     ele.filter(subEle => subEle !== action.payload.topic)
                     : ele)
             };

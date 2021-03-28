@@ -126,7 +126,7 @@ export const deletePracticeProblem = (id) => async (dispatch) => {
 export const deletePracProbByTopic = (category, topic) => async (dispatch) => {
     try {
         const res = await axios.delete(`/api/v1/aptiquestions/deletemany?category=${category}&topic=${topic}`);
-        
+        console.log(res);
 
         if (res.request.status === 204 && res.request.statusText === 'No Content') {
             dispatch({
@@ -142,7 +142,7 @@ export const deletePracProbByTopic = (category, topic) => async (dispatch) => {
             }
         });
     } catch (err) {
-        
+        console.log(err);
         dispatch({
             type: actionTypes.PRACTICE_PROBLEM_ERROR,
             payload: err.response.data.message

@@ -39,7 +39,7 @@ const QuizSubmissions = (props) => {
         if (user?.role === 'student') {
             getQuizSubmissions({ user: user._id });
         }
-        else if (user?.role === 'faculty') {
+        else if (user?.role === 'faculty' || user?.role === 'admin') {
             getQuizSubmissions({ quiz: quizId });
         }
         return () => {

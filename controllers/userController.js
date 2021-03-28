@@ -155,9 +155,21 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
     // if (id >= tours.length) 
 
     const doc = await User.findByIdAndDelete(req.params.id);
+    console.log(doc);
+
     if (!doc) {
         return next(new AppError('No document found with that ID', 404));
     }
+    if (doc.role === 'student') {
+        await CodeSubmission.deleteMany({ user: doc._id });
+        await QuizSubmission.deleteMany({ user: doc._id });
+    }
+    else {
+        await Question.deleteMany({ author: doc._id });
+        await Quiz.deleteMany({ author: doc._id });
+        
+    }
+
     res.status(204).json({
         status: "success",
         data: null

@@ -38,7 +38,7 @@ const CodeSubmissions = (props) => {
         if (user?.role === 'student') {
             getCodeSubmissions({ user: user._id });
         }
-        else if (user?.role === 'faculty') {
+        else if (user?.role === 'faculty' || user?.role === 'admin') {
             getCodeSubmissions({ code: codeId });
         }
         return () => {
