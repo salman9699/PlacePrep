@@ -17,7 +17,7 @@ int main()
   return 0;
 }`;
 
-export const javaCode = `class Solution
+export const javaCode = `class solution
 {
   public static void main(String[] args)
   {
