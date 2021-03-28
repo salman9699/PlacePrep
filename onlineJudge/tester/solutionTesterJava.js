@@ -13,7 +13,7 @@ const testCodeJava = async (file, testcaseFile, inputFile, noOfInputs) => {
 
             exec(`javac ${file}`, function (err, stdout, stderr) {
                 if (err) {
-                    let newStderr = stderr.replace(/onlineJudge\\temp\\user-.*\\solution/gm, 'main');
+                    let newStderr = stderr.replace(/onlineJudge\/temp\/user-.*\/solution/gm, 'main');
 
                     reject(newStderr);
                 }
@@ -72,7 +72,7 @@ const testCodeJava = async (file, testcaseFile, inputFile, noOfInputs) => {
             const info = await new Promise((resolve, reject) => {
                 exec(`java -cp ${classPath} solution < ${inputFile}`, (err, stdout, stderr) => {
                     if (err) {
-                        let newStderr = stderr.replace(/onlineJudge\\temp\\user-.*\\solution/gm, 'main');
+                        let newStderr = stderr.replace(/onlineJudge\/temp\/user-.*\/solution/gm, 'main');
 
                         reject(newStderr);
                     }

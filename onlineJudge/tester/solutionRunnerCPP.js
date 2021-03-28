@@ -12,7 +12,7 @@ const testCodeCPP = async (file, testcaseFile, inputFile, noOfInputs) => {
     let expectedOutput;
     let userOutput;
 
-    let exeFile = file.replace('.cpp', '.exe').replace(/[/]+/gm, '\\');
+    let exeFile = file.replace('.cpp', '.exe') //.replace(/[/]+/gm, '\\');
 
     try {
         await new Promise((resolve, reject) => {

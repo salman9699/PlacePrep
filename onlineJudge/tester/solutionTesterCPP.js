@@ -10,7 +10,7 @@ const { remove_linebreaks,
 const testCodeCPP = async (file, testcaseFile, inputFile, noOfInputs) => {
     // replacing '/' with '\\' because path like './onlineJudge/questions/solution.exe' 
     // is not recognized by machine while running .exe file
-    let exeFile = file.replace('.cpp', '.exe').replace(/[/]+/gm, '\\');
+    let exeFile = file.replace('.cpp', '.exe') //.replace(/[/]+/gm, '\\');
 
     try {
         await new Promise((resolve, reject) => {

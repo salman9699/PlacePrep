@@ -12,7 +12,7 @@ const testCodeC = async (file, testcaseFile, inputFile, noOfInputs) => {
     let expectedOutput;
     let userOutput;
 
-    let exeFile = file.replace('.c', '.exe').replace(/[/]+/gm, '\\');
+    let exeFile = file.replace('.c', '.exe') //.replace(/[/]+/gm, '\\');
     try {
         await new Promise((resolve, reject) => {
             exec(`g++ ${file} -o ${exeFile}`, (err, stdout, stderr) => {
