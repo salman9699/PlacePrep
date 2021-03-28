@@ -48,7 +48,7 @@ function ResetPassword(props) {
                         <div className="col-sm-12">
                             <Form.Group controlId="password" >
                                 <Form.Label><b>Password</b></Form.Label>
-                                <Form.Control className="quiz-inputFiled" name="password" type="password" placeholder="Enter new password"
+                                <Form.Control className="quiz-inputFiled" name="password" type="password" placeholder="Enter new password" minLength="8"
                                     value={passwords.password} onChange={(e) => setPasswords({ ...passwords, password: e.target.value })} />
                             </Form.Group>
                         </div>
@@ -57,7 +57,7 @@ function ResetPassword(props) {
                         <div className="col-sm-12">
                             <Form.Group controlId="passwordConfirm" >
                                 <Form.Label><b>Confirm Password</b></Form.Label>
-                                <Form.Control className="quiz-inputFiled" name="password" type="password" placeholder="Confirm password"
+                                <Form.Control className="quiz-inputFiled" name="password" type="password" placeholder="Confirm password" minLength="8"
                                     value={passwords.passwordConfirm} onChange={(e) => setPasswords({ ...passwords, passwordConfirm: e.target.value })} />
                             </Form.Group>
                         </div>

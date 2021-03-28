@@ -184,6 +184,7 @@ const UserProfile = (props) => {
                             placeholder="••••••••"
                             value={userPasswordDetails.passwordCurrent}
                             onChange={handleOnChangePassword}
+                            minLength="8"
                         />
                     </Form.Group>
                     <Form.Group controlId="newPassword">
@@ -197,6 +198,7 @@ const UserProfile = (props) => {
                             placeholder="••••••••"
                             value={userPasswordDetails.password}
                             onChange={handleOnChangePassword}
+                            minLength="8"
                         />
                     </Form.Group>
                     <Form.Group controlId="confirmPassword">
@@ -210,10 +212,12 @@ const UserProfile = (props) => {
                             placeholder="••••••••"
                             value={userPasswordDetails.passwordConfirm}
                             onChange={handleOnChangePassword}
+                            minLength="8"
                         />
                     </Form.Group>
                     <div className="text-center">
                         <Button
+
                             className="savepassword setting mt-2 "
                             onClick={handleOnSubmitPassword}
                         >
