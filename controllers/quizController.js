@@ -28,11 +28,11 @@ exports.createQuiz = async (req, res, next) => {
                 $in: req.body.questions
             }
         });
-
-        res.status(400).json({
-            status: 'fail',
-            error: err.message
-        });
+        return next(err);
+        // res.status(400).json({
+        //     status: 'fail',
+        //     error: err.message
+        // });
     }
 
 };

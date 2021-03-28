@@ -103,7 +103,7 @@ const Register = (props) => {
                                     name="password"
                                     value={password}
                                     onChange={handleOnChange}
-                                    minLength="8"
+                                    
                                 />
                             </div>
                             <div className="input-field">
@@ -114,7 +114,7 @@ const Register = (props) => {
                                     name="passwordConfirm"
                                     value={passwordConfirm}
                                     onChange={handleOnChange}
-                                    minLength="8"
+                                    
                                 />
                             </div>
                             <input

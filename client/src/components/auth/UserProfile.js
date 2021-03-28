@@ -198,7 +198,7 @@ const UserProfile = (props) => {
                             placeholder="••••••••"
                             value={userPasswordDetails.password}
                             onChange={handleOnChangePassword}
-                            minLength="8"
+
                         />
                     </Form.Group>
                     <Form.Group controlId="confirmPassword">
@@ -212,7 +212,7 @@ const UserProfile = (props) => {
                             placeholder="••••••••"
                             value={userPasswordDetails.passwordConfirm}
                             onChange={handleOnChangePassword}
-                            minLength="8"
+
                         />
                     </Form.Group>
                     <div className="text-center">
